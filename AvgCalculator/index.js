@@ -16,3 +16,17 @@ app.listen(PORT, () => {
     console.log(`Server is running on port number ${PORT}`);
 });
 
+// helper function to fetch the numbers from test server api
+const fetchNumbers = async (numberId) => {
+    const url = `http://20.244.56.144/test/${numberId}`;
+    try {
+        const response = await axios.get(url, { timeout: TIMEOUT });
+        if (response.status === 200) {
+            return response.data.numbers || [];
+        } else {
+            return [];
+        }
+    } catch (error) {
+        return [];
+    }
+};
